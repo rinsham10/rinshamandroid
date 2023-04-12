@@ -1,0 +1,49 @@
+Manifest.xml 
+<uses-permission android:name="android.permission.READ_CONTACTS"/> 
+XML File
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+ xmlns:tools="http://schemas.android.com/tools"
+ android:layout_width="match_parent"
+android:layout_height="match_parent"
+ android:paddingBottom="@dimen/activity_vertical_margin"
+ android:paddingLeft="@dimen/activity_horizontal_margin"
+ android:paddingRight="@dimen/activity_horizontal_margin"
+ android:paddingTop="@dimen/activity_vertical_margin"
+ tools:context=".MainActivity" > 
+ <GridView 
+ android:id="@+id/gridView1"
+ android:layout_width="match_parent"
+ android:layout_height="wrap_content"
+ android:layout_centerHorizontal="true"
+ android:numColumns="3" > 
+ </GridView> 
+</RelativeLayout> 
+Java File 
+package com.example.gridview; 
+import android.widget.GridView; 
+import android.os.Bundle; 
+import android.app.Activity; 
+import android.view.View; 
+import android.widget.GridView; 
+public class MainActivity extends Activity { 
+ GridView gv; 
+ @Override 
+ protected void onCreate(Bundle savedInstanceState) { 
+ super.onCreate(savedInstanceState); 
+ setContentView(R.layout.activity_main); 
+ 
+ gv=(GridView) findViewById(R.id.gridView1);
+ gv.setNumColumns(2); 
+ 
+ Cursor c =managedQuery(Contacts.People.CONTENT_URI, null, null, 
+null,Contacts.People.NAME); 
+ 
+ String[] cols = new String[]{Contacts.People.NAME}; 
+ int[] views= new int[] {android.R.id.text1}; 
+ 
+ SimpleCursorAdapter adpt = new SimpleCursorAdapter(this, 
+android.R.layout.simple_list_item_1, c, cols, views); 
+ 
+ gv.setAdapter(adpt); 
+ } 
+}

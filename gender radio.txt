@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto"
+ xmlns:tools="http://schemas.android.com/tools"
+ android:layout_width="match_parent"   
+ android:layout_height="match_parent" tools:context=".MainActivity"  
+  android:orientation="vertical">
+ <RadioGroup    android:id="@+id/radioGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+        <RadioButton android:id="@+id/radioMale"
+            android:layout_width="match_parent" 
+           android:layout_height="wrap_content" 
+           android:text="Male" />
+        <RadioButton   android:id="@+id/radioFemale"  
+          android:layout_width="match_parent"   
+         android:layout_height="wrap_content"    
+        android:text="Female" />
+    </RadioGroup>
+    <Button    android:id="@+id/buttonDisplay"
+        android:layout_marginLeft="130sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Show" />
+</LinearLayout>
+MainActivity.java
+package com.example.radiobutton;
+import androidx.appcompat.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.Toast;
+import java.util.RandomAccess;
+public class MainActivity extends AppCompatActivity {
+    RadioGroup radioGroup;
+    RadioButton radioButton;
+    Button show;
+    @Override    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        radioGroup=findViewById(R.id.radioGroup);
+        show=findViewById(R.id.buttonDisplay);
+        show.setOnClickListener(new View.OnClickListener() {
+            @Override   public void onClick(View v) {
+                int selectedId=radioGroup.getCheckedRadioButtonId();
+
+                radioButton=findViewById(selectedId);
+                Toast.makeText(MainActivity.this,radioButton.getText(),Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+}

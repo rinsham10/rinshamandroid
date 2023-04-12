@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:orientation="vertical">
+
+    <Checkbox
+        android:id="@+id/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Android" />
+    <Checkbox
+        android:id="@+id/java"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Java" />
+    <Checkbox
+        android:id="@+id/python"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Python" />
+    <Checkbox
+        android:id="@+id/symbian"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Symbian" />
+    <Button
+        android:id="@+id/Clickhere"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="click here" />
+</LinearLayout>
+
+MainActivity.java
+
+package com.example.checkbox;
+import androidx.appcompat.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.Toast;
+public class MainActivity extends AppCompatActivity {
+    private CheckBox android,java,python,symbian;
+    private Button Clickhere;
+    @Override    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        android=findViewById(R.id.android);
+        java=findViewById(R.id.java);
+        python=findViewById(R.id.python);
+        symbian=findViewById(R.id.symbian);
+        Clickhere=findViewById(R.id.Clickhere);
+        Clickhere.setOnClickListener(new View.OnClickListener() {
+            @Override            public void onClick(View v) {
+                StringBuffer OUTPUT=new StringBuffer();
+              OUTPUT.append("Android:").append(android.isChecked());
+                OUTPUT.append("\nJava:").append(java.isChecked());
+              OUTPUT.append("\nPython:").append(python.isChecked());            
+ OUTPUT.append("\nSymbian:").append(symbian.isChecked());            Toast.makeText(MainActivity.this,OUTPUT.toString(),Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+}

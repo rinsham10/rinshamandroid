@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:textSize="40dp"/>
+
+    <Button
+        android:id="@+id/btndate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Set the date" />
+
+    <Button
+        android:id="@+id/btntime"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Set the time" />
+</LinearLayout>
+
+MainActivity.java
+package com.example.dateandtime;
+import androidx.appcompat.app.AppCompatActivity;
+import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.DatePicker;
+import android.widget.TextView;
+import android.widget.TimePicker;
+import java.text.DateFormat;
+import java.util.Calendar;
+public class MainActivity extends AppCompatActivity {
+   DateFormat fmtDateandTime=DateFormat.getDateTimeInstance();
+    TextView lblDateandTime;
+    Calendar myCalender=Calendar.getInstance(); 
+DatePickerDialog.OnDateSetListener d=new DatePickerDialog.OnDateSetListener() {
+        @Override
+public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+            myCalender.set(Calendar.YEAR,year);
+            myCalender.set(Calendar.MONTH,month);
+            myCalender.set(Calendar.DAY_OF_MONTH,dayOfMonth);
+            updateLabel();
+        }
+    };
+ TimePickerDialog.OnTimeSetListener t=new TimePickerDialog.OnTimeSetListener() {
+        @Override
+   public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+            myCalender.set(Calendar.HOUR_OF_DAY,hourOfDay);
+            myCalender.set(Calendar.MINUTE,minute);
+            updateLabel();
+        }
+    };
+    public void updateLabel(){
+lblDateandTime.setText(fmtDateandTime.format(myCalender.getTime()));
+    }
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        lblDateandTime=findViewById(R.id.textView);
+        Button btndate=findViewById(R.id.btndate);
+        btndate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+            new DatePickerDialog(MainActivity.this,d,myCalender.get(Calendar.YEAR),
+                        myCalender.get(Calendar.MONTH),myCalender.get(Calendar.DAY_OF_MONTH)).show();
+            }
+        });
+        Button btntime=findViewById(R.id.btntime);
+        btntime.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new TimePickerDialog(MainActivity.this,t,myCalender.get(Calendar.HOUR_OF_DAY),
+                        myCalender.get(Calendar.MINUTE),true).show();
+            }
+        });
+        updateLabel();
+    }
+}

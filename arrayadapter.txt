@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?> 
+<LinearLayout 
+ android:id="@+id/myLinearLayout"
+android:layout_width="fill_parent"
+ android:layout_height="fill_parent"
+ android:orientation="vertical"
+ xmlns:android="http://schemas.android.com/apk/res/android"> 
+ <TextView 
+ android:id="@+id/selection"
+ android:layout_width="fill_parent"
+ android:layout_height="wrap_content"
+ android:background="#ff0033cc"
+ android:textColor="#ff0000"
+ android:textSize="25dp"
+ android:textStyle="bold"> 
+ </TextView> 
+ <Spinner 
+ android:id="@+id/spinner"
+ android:layout_width="fill_parent"
+ android:layout_height="wrap_content"> 
+ </Spinner> 
+</LinearLayout> 
+.java file 
+package com.example.sevenspinnercontrol; 
+import android.widget.TextView; 
+import android.os.Bundle; 
+import android.app.Activity; 
+import android.view.View; 
+import android.view.View.OnClickListener; 
+import android.widget.TextView; 
+import android.widget.Spinner; 
+public class MainActivity extends Activity implements
+ AdapterView.OnItemSelectedListener { 
+ TextView selection; 
+ String[] items = { "an double os", "COMPUTER", "MOUSE", "KEYBORD", "MONITOR", 
+ "HARD DISK", "LAPTOP", "PRINTER", "SCANNER", "SPEAKER" }; 
+ @Override 
+public void onCreate(Bundle icicle) { 
+ super.onCreate(icicle); 
+ setContentView(R.layout.activity_main); 
+ selection = (TextView) findViewById(R.id.selection); 
+ Spinner spin = (Spinner) findViewById(R.id.spinner); 
+ spin.setOnItemSelectedListener(this); 
+ ArrayAdapter aa = new
+ArrayAdapter(this,android.R.layout.simple_spinner_item,items); 
+ aa.setDropDownViewResource( 
+ android.R.layout.simple_spinner_dropdown_item); 
+ spin.setAdapter(aa); 
+ }
+public void onItemSelected(AdapterView<?> parent, View v, int position, 
+ long id) { 
+ selection.setText(items[position]); 
+ } 
+public void onNothingSelected(AdapterView<?> parent) { 
+ selection.setText(""); 
+ } 
+}
