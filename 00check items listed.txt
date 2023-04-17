@@ -1,67 +1,81 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".MainActivity"
-    android:orientation="vertical">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+xmlns:tools="http://schemas.android.com/tools" 
+android:layout_width="match_parent" 
+android:layout_height="match_parent" 
+tools:context=".MainActivity" >
+<CheckBox
+android:id="@+id/checkBox1" 
+android:layout_width="wrap_content" 
+android:layout_height="wrap_content" 
+android:layout_alignParentLeft="true" 
+android:layout_alignParentTop="true" 
+android:layout_marginLeft="18dp" 
+android:layout_marginTop="30dp" 
+android:text="Android" />
+<CheckBox
+android:id="@+id/checkBox2" 
+android:layout_width="wrap_content" 
+android:layout_height="wrap_content" 
+android:layout_alignLeft="@+id/checkBox1" 
+android:layout_below="@+id/checkBox1"
+android:text="Java" />
+<CheckBox
+android:id="@+id/checkBox3" 
+android:layout_width="wrap_content" 
+android:layout_height="wrap_content" 
+android:layout_alignLeft="@+id/checkBox2" 
+android:layout_below="@+id/checkBox2" 
+android:text="PHP" />
+<CheckBox
+android:id="@+id/checkBox4" 
+android:layout_width="wrap_content" 
+android:layout_height="wrap_content" 
+android:layout_alignLeft="@+id/checkBox3" 
+android:layout_below="@+id/checkBox3" 
+android:text="Shell Script" />
+<Button
+android:id="@+id/button1" 
+android:layout_width="wrap_content" 
+android:layout_height="wrap_content" 
+android:layout_alignLeft="@+id/checkBox4" 
+android:layout_below="@+id/checkBox4" 
+android:layout_marginLeft="58dp" 
+android:layout_marginTop="67dp" 
+android:text="SHOW" />
+</RelativeLayout>
 
-    <Checkbox
-        android:id="@+id/android"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Android" />
-    <Checkbox
-        android:id="@+id/java"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Java" />
-    <Checkbox
-        android:id="@+id/python"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Python" />
-    <Checkbox
-        android:id="@+id/symbian"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Symbian" />
-    <Button
-        android:id="@+id/Clickhere"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="click here" />
-</LinearLayout>
-
-MainActivity.java
-
-package com.example.checkbox;
-import androidx.appcompat.app.AppCompatActivity;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.Toast;
-public class MainActivity extends AppCompatActivity {
-    private CheckBox android,java,python,symbian;
-    private Button Clickhere;
-    @Override    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        android=findViewById(R.id.android);
-        java=findViewById(R.id.java);
-        python=findViewById(R.id.python);
-        symbian=findViewById(R.id.symbian);
-        Clickhere=findViewById(R.id.Clickhere);
-        Clickhere.setOnClickListener(new View.OnClickListener() {
-            @Override            public void onClick(View v) {
-                StringBuffer OUTPUT=new StringBuffer();
-              OUTPUT.append("Android:").append(android.isChecked());
-                OUTPUT.append("\nJava:").append(java.isChecked());
-              OUTPUT.append("\nPython:").append(python.isChecked());            
- OUTPUT.append("\nSymbian:").append(symbian.isChecked());            Toast.makeText(MainActivity.this,OUTPUT.toString(),Toast.LENGTH_LONG).show();
-            }
-        });
-    }
+package com.andoubleos.mycheckbox; 
+import android.os.Bundle; 
+import android.app.Activity; 
+import android.view.View; 
+import android.view.View.OnClickListener; 
+import android.widget.Button; 
+import android.widget.CheckBox; 
+import android.widget.Toast; 
+public class MainActivity extends Activity implements OnClickListener { 
+CheckBox chk1,chk2,chk3,chk4; 
+Button btn; 
+@Override
+protected void onCreate(Bundle savedInstanceState) { 
+super.onCreate(savedInstanceState); 
+setContentView(R.layout.activity_main); 
+chk1=(CheckBox) findViewById(R.id.checkBox1); 
+chk2=(CheckBox) findViewById(R.id.checkBox2); 
+chk3=(CheckBox) findViewById(R.id.checkBox3); 
+chk4=(CheckBox) findViewById(R.id.checkBox4); 
+btn=(Button) findViewById(R.id.button1); 
+btn.setOnClickListener(this); 
 }
+@Override
+public void onClick(View arg0) { 
+// TODO Auto-generated method stub 
+StringBuffer strb = new StringBuffer(); 
+strb.append("Android: ").append(chk1.isChecked()); 
+strb.append("\nJava: ").append(chk2.isChecked()); 
+strb.append("\nPHP: ").append(chk3.isChecked()); 
+strb.append("\nShell Script: ").append(chk4.isChecked()); 
+Toast.makeText(MainActivity.this, strb.toString(), 
+Toast.LENGTH_LONG).show(); 
+}
+}
+
