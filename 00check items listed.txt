@@ -68,7 +68,6 @@ btn.setOnClickListener(this);
 }
 @Override
 public void onClick(View arg0) { 
-// TODO Auto-generated method stub 
 StringBuffer strb = new StringBuffer(); 
 strb.append("Android: ").append(chk1.isChecked()); 
 strb.append("\nJava: ").append(chk2.isChecked()); 
